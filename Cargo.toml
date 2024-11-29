@@ -1,0 +1,22 @@
+[package]
+name = "tmux-bar"
+version = "0.1.0"
+edition = "2021"
+description = "Simple tmux bar"
+readme = "README.md"
+authors = ["wesleimp <wesleimsr@gmail.com>"]
+exclude = ["testdata/**", "tests/**"]
+repository = "https://github.com/wesleimp/tmux-bar"
+
+[lib]
+name = "tmux_bar_lib"
+path = "lib/mod.rs"
+
+[[bin]]
+name = "tmux-bar"
+path = "src/main.rs"
+
+[dependencies]
+battery = "0.7.8"
+chrono = "0.4.38"
+sysinfo = "0.30.7"
