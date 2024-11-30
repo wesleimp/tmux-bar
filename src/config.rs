@@ -3,7 +3,22 @@ use crate::icons::Icon;
 use crate::modules::{styled::StyledModule, Module};
 use tmux_bar_lib::system::battery::BatteryInformation;
 
-pub fn get_modules() -> Vec<StyledModule> {
+pub fn get_left_modules() -> Vec<StyledModule> {
+    vec![Some(StyledModule::new(
+        Module::SessionName,
+        Some(Icon::Tmux),
+        Style {
+            fg: Color::Blue,
+            bg: Color::Reset,
+            bold: false,
+        },
+    ))]
+    .into_iter()
+    .flatten()
+    .collect()
+}
+
+pub fn get_right_modules() -> Vec<StyledModule> {
     let battery_information = BatteryInformation::new();
     let battery_percentage = battery_information.map(|x| x.percentages);
     let is_charging = battery_information.map(|x| x.is_charging).unwrap_or(true);
@@ -11,15 +26,6 @@ pub fn get_modules() -> Vec<StyledModule> {
     let battery_icon = Icon::new_battery(&battery_information);
 
     vec![
-        // Some(StyledModule::new(
-        //     Module::Time("%H:%M:%S"),
-        //     Some(Icon::Time),
-        //     Style {
-        //         fg: Color::Magenta,
-        //         bg: Color::Reset,
-        //         bold: false,
-        //     },
-        // )),
         Some(StyledModule::new(
             Module::Cpu(2),
             Some(Icon::Cpu),
@@ -31,7 +37,7 @@ pub fn get_modules() -> Vec<StyledModule> {
         )),
         Some(StyledModule::new(
             Module::Memory(2),
-            Some(Icon::DoubleServer),
+            Some(Icon::Server),
             Style {
                 fg: Color::Yellow,
                 bg: Color::Reset,
@@ -43,15 +49,6 @@ pub fn get_modules() -> Vec<StyledModule> {
             battery_icon,
             Style {
                 fg: Color::Green,
-                bg: Color::Reset,
-                bold: false,
-            },
-        )),
-        Some(StyledModule::new(
-            Module::SessionName,
-            Some(Icon::Tmux),
-            Style {
-                fg: Color::Blue,
                 bg: Color::Reset,
                 bold: false,
             },

@@ -1,4 +1,4 @@
-use tmux_bar_lib::system::battery::BatteryInformation;
+use crate::system::battery::BatteryInformation;
 
 use std::fmt;
 
@@ -6,17 +6,15 @@ use std::fmt;
 #[allow(dead_code)]
 #[derive(Clone, Copy)]
 pub enum Icon {
-    Manual(&'static str),
+    Custom(&'static str),
     Time,
-    Hyprland,
     I3,
     Arch,
     DetailTux,
     SimpleTux,
     Battery(u8),
     BatteryCharging(u8),
-    DoubleServer,
-    TripleServer,
+    Server,
     Cpu,
     Tmux,
 }
@@ -38,9 +36,8 @@ impl Icon {
 impl fmt::Display for Icon {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            Icon::Manual(s) => write!(f, "{}", s),
+            Icon::Custom(s) => write!(f, "{}", s),
             Icon::Time => write!(f, ""),
-            Icon::Hyprland => write!(f, ""),
             Icon::I3 => write!(f, ""),
             Icon::Arch => write!(f, ""),
             Icon::DetailTux => write!(f, ""),
@@ -73,8 +70,7 @@ impl fmt::Display for Icon {
                 94..=100 => write!(f, "󰂅"),
                 _ => write!(f, ""),
             },
-            Icon::DoubleServer => write!(f, ""),
-            Icon::TripleServer => write!(f, ""),
+            Icon::Server => write!(f, ""),
             Icon::Cpu => write!(f, ""),
             Icon::Tmux => write!(f, ""),
         }

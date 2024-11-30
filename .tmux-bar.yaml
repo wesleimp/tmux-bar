@@ -1,0 +1,15 @@
+left:
+  components:
+    - module: session-name
+      style:
+        fg: blue
+
+right:
+  components:
+    - module: cpu
+      style:
+        fg: cyan
+
+    - module: memory
+      style:
+        fg: yellow
