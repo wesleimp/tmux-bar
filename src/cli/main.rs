@@ -1,34 +1,35 @@
-mod colors;
 mod config;
-mod modules;
 
+use clap::Arg;
 use clap::Parser;
-use modules::styled::StyledModule;
+use std::path::PathBuf;
 use std::sync::Arc;
 use std::thread;
+
+use tmux_bar_lib::colors;
 use tmux_bar_lib::icons;
+use tmux_bar_lib::module;
+use tmux_bar_lib::module::StyledModule;
 
 /// TMux Bar Configuration CLI
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 struct Opt {
-    #[arg(short, long, action = clap::ArgAction::SetTrue)]
-    left: bool,
-    #[arg(short, long, action = clap::ArgAction::SetTrue)]
-    right: bool,
+    #[arg(short = 'f', long)]
+    config: Option<PathBuf>,
 }
 
 fn main() {
     let opt = Opt::parse();
-    if opt.right {
-        print_modules(config::get_right_modules());
-        return;
-    }
-
-    if opt.left {
-        print_modules(config::get_left_modules());
-        return;
-    }
+    // if opt.right {
+    //     print_modules(config::get_right_modules());
+    //     return;
+    // }
+    //
+    // if opt.left {
+    //     print_modules(config::get_left_modules());
+    //     return;
+    // }
 }
 
 fn print_modules(modules: Vec<StyledModule>) {
@@ -43,8 +44,8 @@ fn print_modules(modules: Vec<StyledModule>) {
 
     println!(
         "{}{}{}",
-        config::pre_modules(),
-        strings.join(config::between_modules()),
-        config::post_modules(),
+        module::pre_modules(),
+        strings.join(module::between_modules()),
+        module::post_modules(),
     );
 }

@@ -10,11 +10,10 @@ repository = "https://github.com/wesleimp/tmux-bar"
 
 [lib]
 name = "tmux_bar_lib"
-path = "lib/mod.rs"
 
 [[bin]]
 name = "tmux-bar"
-path = "src/main.rs"
+path = "src/cli/main.rs"
 
 [dependencies]
 battery = "0.7.8"
