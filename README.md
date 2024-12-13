@@ -18,13 +18,13 @@ Simple tmux status line written Rust.
 git clone git@github.com:wesleimp/tmux-bar.git
 ```
 
-2. Install Muxbar
+2. Install
 
 ```bash
-cargo install --path
+cargo install --path .
 ```
 
-3. Apply Muxbar in your `.tmux.conf`
+3. Apply in your `.tmux.conf`
 
 ```conf
 set -g status-right '#(tmux-bar)'
